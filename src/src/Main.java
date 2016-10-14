@@ -48,10 +48,10 @@ public class Main {
 		}
 		
 		System.out.println("Der ggT lautet: " + a.toString());
-		System.out.println(b);
-		System.out.println(a);
-		System.out.println(aValues);
-		System.out.println(bValues);
+
+		System.out.println("All Values of a: " + aValues);
+		System.out.println("All Values of b: " + bValues);
+		System.out.println("All Values of q: " + q);
 	}
 
 
