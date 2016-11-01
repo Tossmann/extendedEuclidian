@@ -43,7 +43,6 @@ public class Main {
 		BigInteger vd = new BigInteger("1");
 		
 		BigInteger c = a;
-		System.out.println(c);
 		BigInteger d = b;
 		
 		BigInteger q;
@@ -70,7 +69,12 @@ public class Main {
 			//bValues.add(b);
 			//something
 		}
-		System.out.println("Der ggT lautet: " + d + " u: " + ud + " v: "+ vd);
+		System.out.println("You entered the value " + a + " for a and " + b + " for b");
+		System.out.println();
+		System.out.println("gcd = u * a + v * b");
+		System.out.println(d + " = " + ud +" * "+ a + " + " + vd + " * " + b);
+		System.out.println();
+		System.out.println("gcd: " + d + "\n" + "u: " + ud + "\n" + "v: " + vd);
 	}
 
 
