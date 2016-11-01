@@ -25,7 +25,7 @@ public class Main {
 		}
 		else
 		{
-			System.out.println("Bitte starten Sie das Programm neu und Ã¼bergeben 2 Argumente");
+			System.out.println("Bitte starten Sie das Programm neu und übergeben 2 Argumente");
 		}	
 	}
 
@@ -33,25 +33,44 @@ public class Main {
 	{
 		ArrayList<BigInteger> aValues = new ArrayList<BigInteger>();
 		ArrayList<BigInteger> bValues = new ArrayList<BigInteger>();
-		ArrayList<Integer> q = new ArrayList<>();
 
 		aValues.add(a);
 		bValues.add(b);
 
-		while(b.intValue() != 0){
-			q.add(a.divide(b).intValue());
-			aValues.add(b);
-			BigInteger tempCopy = a;
-			a = b;
-			b = tempCopy.mod(b);
-			bValues.add(b);
-		}
+		BigInteger uc = new BigInteger("1");
+		BigInteger vc = new BigInteger("0");
+		BigInteger ud = new BigInteger("0");
+		BigInteger vd = new BigInteger("1");
 		
-		System.out.println("Der ggT lautet: " + a.toString());
+		BigInteger c = a;
+		System.out.println(c);
+		BigInteger d = b;
+		
+		BigInteger q;
+		
+		while(c.intValue() != 0){
+			q = d.divide(c);
+			
+			BigInteger tempCopyC = c;
+			c = d.subtract(q.multiply(c));
+			d = tempCopyC;
 
-		System.out.println("All Values of a: " + aValues);
-		System.out.println("All Values of b: " + bValues);
-		System.out.println("All Values of q: " + q);
+			
+			BigInteger tempCopyUC = uc;
+			BigInteger tempCopyVC = vc;
+			uc = ud.subtract(q.multiply(uc));
+			vc = vd.subtract(q.multiply(vc));
+			ud = tempCopyUC;
+			vd = tempCopyVC;		
+			
+			//aValues.add(b);
+			//BigInteger tempCopy = a;
+			//a = b;
+			//b = tempCopy.mod(b);
+			//bValues.add(b);
+			//something
+		}
+		System.out.println("Der ggT lautet: " + d + " u: " + ud + " v: "+ vd);
 	}
 
 
