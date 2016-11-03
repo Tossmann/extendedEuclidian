@@ -2,48 +2,50 @@ package src;
 import java.awt.List;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Scanner;
 
-public class Main {	
-	public static void main(String [] args){	
-		if(args.length > 1){
-			BigInteger a = new BigInteger(args[0]);
-			BigInteger b = new BigInteger(args[1]);
-			// System.out.println("the gcd is: " + a.gcd(b));
+public class Main {
 
-			if(a.compareTo(b) == 1) 
-			{
-				ggT(a,b);
-			}
-			if(a.compareTo(b) == -1)
-			{
-				ggT(b,a);
-			}
-			if(a.compareTo(b) == 0)
-			{
-				System.out.println("Die eingegebenen Zahlen sind identisch. Der ggT lautet "+ args[0]);
-			}
-		}
-		else
-		{
-			System.out.println("Bitte starten Sie das Programm neu und übergeben 2 Argumente");
-		}	
+	static int firstPrime = 17;
+	static int secondPrime = 23;
+	static int firstInteger = 2;
+	static int secondInteger = 3;
+	static BigInteger firstPrimeNumber = BigInteger.valueOf(firstPrime);
+	static BigInteger secondPrimeNumber = BigInteger.valueOf(secondPrime);
+	static BigInteger firstIntegerNumber = BigInteger.valueOf(firstInteger);
+	static BigInteger secondIntegerNumber = BigInteger.valueOf(secondInteger);
+	
+	static BigInteger uNumber;
+	static BigInteger vNumber;
+	
+	private static void printInputValues() {
+		System.out.println("First Prime Number is " + firstPrimeNumber + " and the second one ist " + secondPrimeNumber);
+		System.out.println("First Integer Number is " + firstIntegerNumber + " and the second one ist " + secondIntegerNumber);
 	}
-
-	public static void ggT(BigInteger a, BigInteger b)
-	{
-		ArrayList<BigInteger> aValues = new ArrayList<BigInteger>();
-		ArrayList<BigInteger> bValues = new ArrayList<BigInteger>();
-
-		aValues.add(a);
-		bValues.add(b);
-
+	
+	public static void main(String[] args) {
+		comparePrimeNumbers();
+		printInputValues();
+		calculateExtendedEuclidianAlgorithm();
+		calculateNewMysterioseNumber();
+	}
+	
+	public static void comparePrimeNumbers () {
+			if(firstPrimeNumber.compareTo(secondPrimeNumber) == -1) {
+				BigInteger tempCopy = firstPrimeNumber;
+				firstPrimeNumber = secondPrimeNumber;
+				secondPrimeNumber = tempCopy;
+			}
+	}
+	
+	public static void calculateExtendedEuclidianAlgorithm() {
 		BigInteger uc = new BigInteger("1");
 		BigInteger vc = new BigInteger("0");
 		BigInteger ud = new BigInteger("0");
 		BigInteger vd = new BigInteger("1");
 		
-		BigInteger c = a;
-		BigInteger d = b;
+		BigInteger c = firstPrimeNumber;
+		BigInteger d = secondPrimeNumber;
 		
 		BigInteger q;
 		
@@ -54,27 +56,36 @@ public class Main {
 			c = d.subtract(q.multiply(c));
 			d = tempCopyC;
 
-			
 			BigInteger tempCopyUC = uc;
 			BigInteger tempCopyVC = vc;
 			uc = ud.subtract(q.multiply(uc));
 			vc = vd.subtract(q.multiply(vc));
 			ud = tempCopyUC;
-			vd = tempCopyVC;		
-			
-			//aValues.add(b);
-			//BigInteger tempCopy = a;
-			//a = b;
-			//b = tempCopy.mod(b);
-			//bValues.add(b);
-			//something
+			vd = tempCopyVC;			
 		}
-		System.out.println("You entered the value " + a + " for a and " + b + " for b");
+		
+		uNumber = ud;
+		vNumber = vd;
+		
+		
+		System.out.println("The result of the extended Euclidian Algorithm is : ");
+		System.out.print(d + " = " + ud +" * "+ firstPrimeNumber + " + " + vd + " * " + secondPrimeNumber);
 		System.out.println();
-		System.out.println("gcd = u * a + v * b");
-		System.out.println(d + " = " + ud +" * "+ a + " + " + vd + " * " + b);
+		System.out.println("The greatest common divisor is " + d);
+		System.out.println("The parameter 'u' is " + ud);
+		System.out.println("The parameter 'v' is " + vd);
+	}
+
+	public static void calculateNewMysterioseNumber() {
+		BigInteger y = ((firstIntegerNumber.subtract(secondIntegerNumber)).multiply(uNumber)).subtract(secondPrimeNumber);
+		BigInteger x = (y.multiply(firstPrimeNumber)).add(secondIntegerNumber);
+		
 		System.out.println();
-		System.out.println("gcd: " + d + "\n" + "u: " + ud + "\n" + "v: " + vd);
+		System.out.println("Calculation of new Prime Number:");
+		System.out.println("First Step: 'Z' = " + uNumber);
+		System.out.println("Second Step: 'Y' = " + y);
+		System.out.println("Third Step: 'X' = " + x);
+		System.out.println("The new calculated Prime Number is: " + x.abs());
 	}
 
 
